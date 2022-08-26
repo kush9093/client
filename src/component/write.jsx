@@ -9,6 +9,10 @@ function Write() {
 
     }
 
+    const option = ["미분류","식비","주거/통신","생활용품","의복/미용","건강/문화","교통/차량","용돈/기타"]
+    .map((elm)=>{
+        return <option key={elm} value={elm}>{elm}</option>
+    })
 
     return (
         <form className="mt-5" onSubmit={handleSubmit}>
@@ -47,7 +51,7 @@ function Write() {
                 <select type="text" className="form-control" id="cateroy" name="cateroy" ref={(elm)=>{
                     subref.current["cateroy"] = elm;
                 }} >
-
+                    {option}
                 </select>
                 <label htmlFor="cateroy">카테고리</label>
             </div>
