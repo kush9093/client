@@ -9,7 +9,7 @@ import AccountAPI from './component/servise/accountAPI';
 import { useState } from 'react';
 
 // cmd ==> ipconfig
-const accountAPI = new AccountAPI("http:192.168.4.97:8080")
+const accountAPI = new AccountAPI("http://192.168.4.97:8080")
 
 function App() {
 
@@ -17,11 +17,11 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Header />
+      <Header props={logon} />
         <Container>
           <Routes>
             <Route path="/" element={<Index/>}/>
-            <Route path="login" element={<Login />} />
+            <Route path="login" element={<Login accountAPI={accountAPI} setLogon={setLogon} />} />
             <Route path="register" element={<Register />}/>
           </Routes>
         </Container>

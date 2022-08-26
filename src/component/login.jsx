@@ -1,27 +1,43 @@
 import { useRef } from "react";
+import {useNavigate} from "react-router-dom";
 
-function Login() {
 
+function Login({accountAPI,setLogon}) {
+    // const {accountAPI,setLogon} = props;
     const email = useRef();
-    const pwd = useRef();
+    const password = useRef();
+
+    const navigate = useNavigate();
+
     const handleSubmit = (event) => {
         event.preventDefault();
-        fetch("http://localhost:8080/api/account/auth", {
-            method: "POST",
-            headers: {
-                "content-type": "application/json",
-            },
-            body: JSON.stringify({
-                email:email.current.value,
-                password:pwd.current.value
-            }),
-        }).then(response => response.json())
-        .then(json => {
-            if(json.result){
-                localStorage.setItem('token', json.token);
-                window.location.href = "http://localhost:3000"
+        accountAPI.auth(email.current.value,password.current.value)
+        .then(received=>{
+            console.log(received);
+            if(received.result){
+                setLogon(true);
+                console.log(received.token); // 어딘가에 저장
+                navigate("/")
+            } else {
+                
             }
-        });
+        })
+        // fetch("http://localhost:8080/api/account/auth", {
+        //     method: "POST",
+        //     headers: {
+        //         "content-type": "application/json",
+        //     },
+        //     body: JSON.stringify({
+        //         email:email.current.value,
+        //         password:password.current.value
+        //     }),
+        // }).then(response => response.json())
+        // .then(json => {
+        //     if(json.result){
+        //         localStorage.setItem('token', json.token);
+        //         window.location.href = "http://localhost:3000"
+        //     }
+        // });
     }
 
 
@@ -34,7 +50,7 @@ function Login() {
                     <label htmlFor="email">Email</label>
                 </div>
                 <div className="form-floating mt-3 mb-3">
-                    <input type="text" className="form-control" id="pwd" placeholder="Enter password" name="pswd" ref={pwd} required />
+                    <input type="text" className="form-control" id="password" placeholder="Enter password" name="password" ref={password} required />
                     <label htmlFor="pwd">Password</label>
                 </div>
                 <div className="d-grid mb-3 mt-3">
