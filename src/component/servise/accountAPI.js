@@ -20,6 +20,14 @@ class AccountAPI {
         })
         return await response.json();
     }
+    
+    async valid(token){
+        const response = await fetch(this.baseURL+"/api/account/valid",{
+            ...this.postOption,
+            body : JSON.stringify({token})
+        })
+        return await response.json();
+    }
 
 
     async register(email,password,name,gender,birth){

@@ -1,9 +1,11 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import {useNavigate} from "react-router-dom";
 
 
 function Login({accountAPI,setLogon}) {
+
     // const {accountAPI,setLogon} = props;
+    const [error,setError] = useState(false);
     const email = useRef();
     const password = useRef();
 
@@ -16,34 +18,21 @@ function Login({accountAPI,setLogon}) {
             console.log(received);
             if(received.result){
                 setLogon(true);
-                console.log(received.token); // 어딘가에 저장
+                console.log(received.token); // 어딘가? 에 저장
+                localStorage.setItem("token",received.token);
+                localStorage.setItem("email",email.current.value);
                 navigate("/")
+                setError(false);
             } else {
-                
+                setError(true);
             }
         })
-        // fetch("http://localhost:8080/api/account/auth", {
-        //     method: "POST",
-        //     headers: {
-        //         "content-type": "application/json",
-        //     },
-        //     body: JSON.stringify({
-        //         email:email.current.value,
-        //         password:password.current.value
-        //     }),
-        // }).then(response => response.json())
-        // .then(json => {
-        //     if(json.result){
-        //         localStorage.setItem('token', json.token);
-        //         window.location.href = "http://localhost:3000"
-        //     }
-        // });
     }
 
 
     return (<>
         <div style={{marginTop:"15%",marginLeft:"10%",marginRight:"10%"}}>
-            <div className="h1" style={{textAlign:"center",marginBottom:"5%"}}>𝓂ℴ𝓃ℯ𝓎𝒷ℴℴ𝓀</div>
+            <div className="h1" style={{textAlign:"center",marginBottom:"5%",color:"white"}}>𝓂ℴ𝓃ℯ𝓎𝒷ℴℴ𝓀</div>
             <form onSubmit={handleSubmit}>
                 <div className="form-floating mb-3 mt-3 ml-3 mr-3">
                     <input type="text" className="form-control" id="email" placeholder="Enter email" name="email" ref={email} required />
@@ -54,7 +43,7 @@ function Login({accountAPI,setLogon}) {
                     <label htmlFor="pwd">Password</label>
                 </div>
                 <div className="d-grid mb-3 mt-3">
-                    <button type="submit" className="btn btn-primary btn-block">Submit</button>
+                    <button type="submit" className="btn btn-outline-light btn-block">Submit</button>
                 </div>
             </form>
         </div>

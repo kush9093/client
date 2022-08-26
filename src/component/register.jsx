@@ -57,7 +57,7 @@ function Register() {
                     <input type="text" ref={nameref} name="name" className="form-control" placeholder="Name"/>
                 </div>
                 <div>
-                <label className="form-label">gender</label>
+                <label className="form-label" style={{color:"white"}}>gender</label>
                     <select name="gender" ref={genderref} className="form-select">
                         <option key="nondisclosure" value="nondisclosure">미공개</option>
                         <option key="male" value="male">남자</option>
@@ -65,13 +65,13 @@ function Register() {
                     </select>
                 </div>
                 <div>
-                <label className="form-label">birth</label>
+                <label className="form-label" style={{color:"white"}}>birth</label>
                     <select name="birth" ref={birthref} className="form-select">
                         {birth}
                     </select>
                 </div>
                 <div className="d-grid">
-                    <button type="submit" className="btn btn-primary">register</button>
+                    <button type="submit" className="btn btn-outline-light">register</button>
                 </div>
             </form>
         </div>
