@@ -6,6 +6,7 @@ function Index() {
     const moveLogin = (evt) =>{
         // evt.preventDefault();
       navigate("/login")
+      console.log("djfklad");
     }
 
     return (<div className="card mt-5" >
