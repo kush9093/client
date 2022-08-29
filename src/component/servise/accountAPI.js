@@ -30,7 +30,7 @@ class AccountAPI {
     }
 
 
-    async register(email,password,name,gender,birth){
+    async register({email,password,name,gender,birth}){
         const response = await fetch(this.baseURL+"/api/account/register",{
             ...this.postOption,
             body : JSON.stringify({email,password,name,gender,birth})

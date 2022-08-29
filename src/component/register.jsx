@@ -1,9 +1,7 @@
 import { useRef } from "react";
+import {useNavigate} from "react-router-dom";
 
-
-function Register() {
-
-    
+function Register({accountAPI}) {
 
     const year = [];
     for(let i = new Date(Date.now()).getFullYear();i>=1930;i--){
@@ -17,27 +15,19 @@ function Register() {
     const nameref = useRef();
     const genderref = useRef();
     const birthref = useRef();
+    const navigate = useNavigate();
 
     const handleRegister = (evt) =>{
         evt.preventDefault();
-        fetch("http://localhost:8080/api/account/register",{
-            method:"POST",
-            headers:{
-                "content-type":"application/json",
-
-            },
-            body:JSON.stringify({
-                email:emailref.current.value,
-                password:pwdref.current.value,
-                name:nameref.current.value,
-                gender:genderref.current.value,
-                birth:birthref.current.value
-            })
-        }).then((response)=>response.json())
-        .then(json => {
-            if(json.result){
-                window.location.href = "http://localhost:3000"
-            }
+        const body = {
+            email:emailref.current.value,
+            password:pwdref.current.value,
+            name:nameref.current.value,
+            gender:genderref.current.value,
+            birth:birthref.current.value
+        }
+        accountAPI.register(body).then(()=>{
+            navigate("/")
         })
     } 
 

@@ -6,12 +6,13 @@ import Login from './component/login';
 import Register from "./component/register";
 import { Container } from 'react-bootstrap';
 import AccountAPI from './component/servise/accountAPI';
+import HistoryAPI from './component/servise/historyAPI';
 import { useEffect, useState } from 'react';
-import Write from './component/write';
 import History from './component/history';
 
 // cmd ==> ipconfig
 const accountAPI = new AccountAPI("http://192.168.4.97:8080")
+const historyAPI = new HistoryAPI("http://192.168.4.97:8080")
 
 function App() {
     const [logon,setLogon] = useState(null);
@@ -36,9 +37,10 @@ function App() {
       <Nav logon={logon} setLogon={setLogon} />
         <Container>
           <Routes>
-            <Route path="/" element={<History />}/>
-            <Route path="login" element={<Login accountAPI={accountAPI} setLogon={setLogon} />} />
-            <Route path="register" element={<Register />}/>
+            <Route path="/" element={<Index />}/>
+            <Route path="/login" element={<Login accountAPI={accountAPI} setLogon={setLogon} />} />
+            <Route path="/history" element={<History historyAPI={historyAPI} logon={logon}/>}/>
+            <Route path="/register" element={<Register accountAPI={accountAPI} />}/>
           </Routes>
         </Container>
       </BrowserRouter>

@@ -1,11 +1,22 @@
 import { useRef } from "react";
 
-function Write() {
+function Write({historyAPI,handleItem}) {
     const subref = useRef({});
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
         console.log(subref.current);
+        let arr = [];
+        for(let i in subref.current){
+           arr.push(subref.current[i].value) 
+        }
+        historyAPI.write(...arr)
+        for(let i in subref.current){
+            if(subref.current[i].name !== "cateroy"){
+            subref.current[i].value = "";
+            }
+         }
+         handleItem();
 
     }
 
@@ -62,7 +73,7 @@ function Write() {
                 <label htmlFor="tag">태그</label>
             </div>
             <div className="d-flex justify-content-end">
-                <button type="submit" className="btn btn-outline-success">작성</button>
+                <button type="submit" className="btn btn-outline-success" data-bs-dismiss="modal">작성</button>
                 <button type="button" className="btn btn-danger" data-bs-dismiss="modal">취소</button>
             </div>
         </form>
