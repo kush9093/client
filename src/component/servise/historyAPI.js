@@ -57,6 +57,12 @@ class HistoryAPI {
         })
         return await response.json();
     }
+    async dayRange(begin,end){
+        const response = await fetch(this.baseURL+"/api/history/search?begin="+begin+"&end="+end,{
+            ...this.getOption,
+        })
+        return await response.json()
+    }
 }
 
 export default HistoryAPI;

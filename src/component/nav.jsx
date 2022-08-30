@@ -19,6 +19,16 @@ function Nav(props) {
     </div>
     <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav">
+        <li className="nav-item">
+            {
+              logon && <Link to="/report" className="btn btn-outline-dark nav-link">report</Link>
+            }
+          </li>
+        <li className="nav-item">
+            {
+              logon && <Link to="/history" className="btn btn-outline-dark nav-link">history</Link>
+            }
+          </li>
           <li className="nav-item">
             {
               !logon && <Link to="/login" className="btn btn-outline-dark nav-link " >Login</Link>

@@ -9,6 +9,7 @@ import AccountAPI from './component/servise/accountAPI';
 import HistoryAPI from './component/servise/historyAPI';
 import { useEffect, useState } from 'react';
 import History from './component/history';
+import Report from './component/report';
 
 // cmd ==> ipconfig
 const accountAPI = new AccountAPI("http://192.168.4.97:8080")
@@ -41,6 +42,7 @@ function App() {
             <Route path="/login" element={<Login accountAPI={accountAPI} setLogon={setLogon} />} />
             <Route path="/history" element={<History historyAPI={historyAPI} logon={logon}/>}/>
             <Route path="/register" element={<Register accountAPI={accountAPI} />}/>
+            <Route path="/report" element={<Report historyAPI={historyAPI} />} />
           </Routes>
         </Container>
       </BrowserRouter>
